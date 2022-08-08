@@ -1,0 +1,30 @@
+{
+  "name": "projeto_iteris",
+  "version": "1.0.0",
+  "description": "Desafio SomoS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/han19githtbr/Projeto_Iteris_Handy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/han19githtbr/Projeto_Iteris_Handy/issues"
+  },
+  "homepage": "https://github.com/han19githtbr/Projeto_Iteris_Handy#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "sequelize": "^6.21.3",
+    "sqlite3": "^5.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19",
+    "sequelize-cli": "^6.4.1"
+  }
+}
