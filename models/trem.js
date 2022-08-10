@@ -1,4 +1,22 @@
-'use strict';
+const express = require('express')
+
+const sequelize = require('./config/database')
+
+const Routes = require('./routes/trem.routes')
+
+const app = express()
+
+app.use(express.json());
+
+sequelize.sync().then(() => console.log('banco de dados conectado com sucesso!'))
+
+app.use('/tasks', Routes)
+
+app.get('/', (req, res) => {
+  
+})
+
+/*'use strict';
 
 const fs = require('fs');
 const path = require('path');
@@ -34,4 +52,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+module.exports = db;*/
