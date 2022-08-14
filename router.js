@@ -4,13 +4,11 @@ const router = express.Router()
 
 const conn = require('./database/db')
 
-
 const path = require('path')
 
 const multer = require('multer')
 
 const fs = require('fs')
-
 
 const storage = multer.diskStorage({
     destination : function (req, file, cb){
@@ -78,8 +76,6 @@ router.get('/:id',(req, res)=>{
 // });
 
 
-
-
 // excluir item
 router.get('/delete-action/:id',(req,res)=>{
     const id= req.params.id
@@ -144,6 +140,34 @@ router.post('/add-action', upload.single('upload'),(req, res)=>{
 })
 
 
+router.post('/add-action/:id', upload.single('upload'),(req, res)=>{
+    
+    const id = req.params.id
+    //const file= req.file.filename
+    const {name} = req.body
+    //atributos
+    const {hp} = req.body
+    const {attack} = req.body
+    const {defense} = req.body
+    const {speed} = req.body
+    const {special_attack} = req.body
+    const {special_defense} = req.body
+
+    let atributo = {"hp":hp, "attack": attack, "defense": defense, "speed": speed, "sp": special_attack, "sd": special_defense};
+    
+    atributo = JSON.stringify(atributo);
+    
+    conn.query('INSERT INTO tb_user SET?',{ name: name, atributo: atributo },(error, result)=>{
+      if(error){
+        throw error
+      }else{
+        res.redirect('/')
+      }
+    })
+})
+
+
+
 // editar item
 /*router.get('/edit-action/:id',(req, res)=>{
       
@@ -164,16 +188,16 @@ router.post('/add-action', upload.single('upload'),(req, res)=>{
 
 // editar item
 router.post('/edit-action', upload.single('upload'), (req, res)=>{
-    const id= req.body.id
+    const id = req.body.id
     const file = req.file.filename
-    const {name}= req.body
+    const {name} = req.body
     //atributos
-    const {hp}= req.body
-    const {attack}= req.body
-    const {defense}= req.body
-    const {speed}= req.body
-    const {special_attack}= req.body
-    const {special_defense}= req.body
+    const {hp} = req.body
+    const {attack} = req.body
+    const {defense} = req.body
+    const {speed} = req.body
+    const {special_attack} = req.body
+    const {special_defense} = req.body
 
     let atributo = {"hp":hp, "attack": attack, "defense": defense, "speed": speed, "sp": special_attack, "sd": special_defense};
 
@@ -181,7 +205,7 @@ router.post('/edit-action', upload.single('upload'), (req, res)=>{
     
     if(req.file == undefined){
        
-        conn.query('SELECT * FROM tb_pokemon WHERE id=?',[id],(error, result)=>{
+        conn.query('SELECT * FROM tb_pokemon WHERE id = ?',[id],(error, result)=>{
             const old = result[0].file     
         //conn.query('UPDATE tb_pokemon SET? WHERE id = ?',[{file: old,name: name, hp: hp, attack: attack,defense: defense, speed: speed,special_attack: special_attack,special_defense:special_defense}, id],(error, result)=>{
         conn.query('UPDATE tb_pokemon SET? WHERE id = ?',[{file: old,name: name, atributo: atributo}, id],(error, result)=>{
@@ -197,7 +221,7 @@ router.post('/edit-action', upload.single('upload'), (req, res)=>{
         })
 
     }else{
-        const file= req.file.filename
+        const file = req.file.filename
 
         conn.query('SELECT file FROM tb_pokemon WHERE id=?',[id],(error, result)=>{
             const oldImage = result[0].file
