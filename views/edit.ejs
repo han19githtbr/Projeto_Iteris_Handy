@@ -1,0 +1,51 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>Edit pokemon</h2>
+    <% if (user){ %>
+    <form action="/edit-action" method="post" enctype="multipart/form-data">
+
+        <input type="text" name="id" value="<%= user.id %>" hidden>
+        <input type="file" name="upload" value="<%= user.file %>">
+        <br>
+       <img src="/<%= user.file %>" alt="" width="50px">
+        <br><br>
+
+        <input type="text" name="name" value="<%= user.name %>">
+        <br><br>
+
+
+        <input type="text" name="hp" value="<%= user.hp %>">
+        <br><br>
+
+        <input type="text" name="attack" value="<%= user.attack %>">
+        <br><br>
+
+        <input type="text" name="defense" value="<%= user.defense %>">
+        <br><br>
+
+        <input type="text" name="speed" value="<%= user.speed %>">
+        <br><br>
+
+        <input type="text" name="special_attack" value="<%= user.special_attack %>">
+        <br><br>
+
+        <input type="text" name="special_defense" value="<%= user.special_defense %>">
+        <br><br>
+       <input type="submit" value="Edit">
+      
+
+    </form>
+    <% } %>
+    
+</body>
+</html>
