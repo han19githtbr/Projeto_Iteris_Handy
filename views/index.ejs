@@ -1,20 +1,23 @@
+
+
 <button>
+
     <a href="/add">add</a>
 </button>
 </br>
 <table width="100%"; border="1";>
     <thead>
-        <tr>
+       <tr>
            <td>Id</td>
-           <td>Imagem</td>
+        <td>Imagem</td>
            <td>Name</td>
            <td>hp</td>
            <td>attack</td>
-           <td>defense</td>
+            <td>defense</td>
            <td>special attack</td>
            <td>special defense</td>
-           <td>Ações</td>
-        </tr>
+        <td>Ações</td>
+       </tr>
     </thead>
 
     <tbody>
@@ -36,14 +39,15 @@
                 <td>
                     <%= user.special_defense %>
                 </td>
-                <td>
-                    <button>
+               <td>
+                   <button>
                        <a href="/edit-action/<%= user.id %>">edit</a>
-                    </button>
-                    <button>
+                   </button>
+                   <button>
                        <a href="/delete-action/<%= user.id %>" onclick=" return confirm('tem certeza de excluir esse usuario?')">delete</a>
-                    </button>
-                </td>
+                   </button>
+               </td>
+            
             </tr>
         <%})%>
     </tbody>

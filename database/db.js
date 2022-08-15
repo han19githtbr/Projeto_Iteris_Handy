@@ -1,6 +1,6 @@
 const sql = require('mysql2')
 
-const conn = sql.createConnection({
+const conn= sql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -8,12 +8,13 @@ const conn = sql.createConnection({
 })
 
 
-conn.connect((error) => {
-    if(error) {
+
+conn.connect((error)=>{
+    if(error){
         console.error('erro da conexão: '+ error)
         return
     }
-    console.log('conectado com o banco de dados com sucesso!')
+    console.log('conetado com o banco de dados com sucesso!')
 })
 
 module.exports = conn;

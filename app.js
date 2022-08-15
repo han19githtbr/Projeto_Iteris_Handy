@@ -8,13 +8,13 @@ app.use(cors({
 }))
 
 
-app.use('/',express.static(path.resolve(__dirname,"upload")))
+app.use('/',express.static(path.resolve(__dirname,"uplaod")))
 
 
 var router = require('./router')
 
 
-const port = process.env.PORT || 5000
+const port= process.env.PORT || 5000
 
 app.set('view engine', 'ejs');
 
@@ -24,6 +24,7 @@ app.use(express.static('upload'))
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
 
 
 app.use('/', router);
