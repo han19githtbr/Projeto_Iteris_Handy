@@ -4,13 +4,11 @@ const router= express.Router()
 
 const conn= require('./database/db')
 
-
 const path = require('path')
 
 const multer = require('multer')
 
 const fs = require('fs')
-
 
 const storage= multer.diskStorage({
     destination : function (req, file,cb){
@@ -45,8 +43,7 @@ const fileFilter =(req, file, cb) => {
 
 
 
-// selecionar item
-
+// Listar todas as cartas armazenadas na tabela do Banco de Dados
 router.get('/', function (req, res){
     conn.query('SELECT * FROM tb_pokemon2 ORDER BY id DESC', (error, result)=>{
         if(error){
@@ -57,49 +54,18 @@ router.get('/', function (req, res){
         //exibe o resultado em formato de json no navegador 
         res.json(result)   
         
-        //    res.send(result)
+        //res.send(result)
 
         }
     })
 })
 
-
-
-
-// selecionar 1 item
-
-/* router.get('/:id',(req, res)=>{
-      
-        const id= req.params.id
-
-        conn.query('SELECT * FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{
-      
-         if(error){
-             throw error
-         }else{
-             res.json(result)
-           
-         }
-     })
-
- })*/
-
-
-
 // router.get('*', function(req, res){
 //   res.send('pagina não encontrado', 404);
 // });
 
-
-
-
-
-
-// excluir item
-
-
-
-router.get('/delete-action/:id',(req,res)=>{
+// excluir uma carta na tabela
+router.delete('/delete-action/:id',(req,res)=>{
     const id= req.params.id
     console.log(id)
 
@@ -134,15 +100,14 @@ router.get('/delete-action/:id',(req,res)=>{
 
 
 
-
-// adicionar item
+//cadastrar uma carta
 router.get('/add',(req, res)=>{
     res.render('add')
 })
 
 
-
-router.post('/add-action', upload.single('upload'),(req, res)=>{
+// enviar uma carta no Banco de Dados
+router.post('/add-action', upload.single('upload'), (req, res)=>{
     const file= req.file.filename
     const {name}= req.body
     const {hp}= req.body
@@ -152,26 +117,47 @@ router.post('/add-action', upload.single('upload'),(req, res)=>{
     const {special_attack}= req.body
     const {special_defense}= req.body
 
-    let atributo= { "hp": hp, "attack": attack,"defense": defense, "speed": speed,"special_attack": special_attack,"special_defense":special_defense }
-    atributo= JSON.stringify(atributo)
+    //let atributo= { "hp": hp, "attack": attack,"defense": defense, "speed": speed,"special_attack": special_attack,"special_defense":special_defense }
+    //atributo= JSON.stringify(atributo)
     
-    conn.query('INSERT INTO tb_pokemon2 SET?',{ file: file,name: name, atributo: atributo },(error, result)=>{
+    conn.query('INSERT INTO tb_pokemon2 SET?',{ file: file, name: name, hp: hp, attack: attack, defense: defense, speed: speed, special_attack: special_attack, special_defense: special_defense },(error, result)=>{
       if(error){
         throw error
       }else{
           res.redirect('/')
+        //res.json(result)
       }
   })
-
   
 })
 
 
-// editar item
+// atualizar os atributos de uma determinada carta
+router.patch('/edit-action/:id',(req, res, next)=>{
+      
+    const id= req.params.id
+    
+    conn.query(`UPDATE tb_pokemon2 SET attack= 10, defense = 10  WHERE id = ${id}`,
+   
+    function(err, result){
+         if(err){
+            res.status(400).json({"error":err.message})
+            return;
+         }
+         res.json(result)
+
+         //res.render('edit',{user:result[0]})
+     })
+})
+
+
+
+
+// Filtar a lista de cartas e retornar uma carta específica
 router.get('/edit-action/:id',(req, res)=>{
       
     const id= req.params.id
-
+    
     conn.query('SELECT * FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{
    
      if(error){
@@ -188,78 +174,48 @@ router.get('/edit-action/:id',(req, res)=>{
 
 
 
-
-
-router.post('/edit-action', upload.single('upload'), (req, res)=>{
-    const id= req.body.id
-     //const file= req.file.filename
-     const {name}= req.body
+// Comparar duas cartas pelo id de cada uma. Se o playerOne tem o maior numero de atributos vencedores, 
+router.post('/comparacao/:id', (req, res)=>{
+    //const file= req.file.filename
+    //const {name}= req.body
     const {hp}= req.body
     const {attack}= req.body
     const {defense}= req.body
     const {speed}= req.body
     const {special_attack}= req.body
     const {special_defense}= req.body
+    
+    
+    let playerOne  = req.body
+    let playerTwo  = req.body
 
+    if (playerOne.atributo > playerTwo.atributo) {
+        playerOne.id = id_winner 
+    } else {
+        playerTwo.id = id_looser
+    }
+        
+    let atributo = { "hp": hp, "attack": attack,"defense": defense, "speed": speed,"special_attack": special_attack,"special_defense":special_defense }
+    atributo = JSON.stringify(atributo)
+    
+    conn.query('SELECT * FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{ 
 
-
-     if(req.file == undefined){
-       
-        conn.query('SELECT * FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{
-            const old = result[0].file     
-        conn.query('UPDATE tb_pokemon2 SET? WHERE id = ?',[{file: old,name: name, hp: hp, attack: attack,defense: defense, speed: speed,special_attack: special_attack,special_defense:special_defense}, id],(error, result)=>{
-            if(error){
-                throw error
-          }else{
-           res.redirect('/')
-        //  res.send(result[0])
-        //  res.send(result)
-            
-         }
-         })
-        })
-
-     }else{
-         const file= req.file.filename
-
-        conn.query('SELECT file FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{
-            const oldImage = result[0].file
-
-            conn.query('DELETE file FROM tb_pokemon2 WHERE id=?',[id],(error, result)=>{
-
-               fs.unlink('upload/'+oldImage,(err)=>{
-                   if(err){
-                       console.log(err)
-                   }else{
-                       conn.query('UPDATE tb_pokemon2 SET? WHERE id = ?',[{file: file,name: name, hp: hp, attack: attack,defense: defense, speed: speed,special_attack: special_attack,special_defense:special_defense}, id],(error, result)=>{
-                         if(error){
-                            throw error
-                       }else{
-                      res.redirect('/')
-                        //  res.send(result)
-                       
-                      }
-                      })
-                   }
-               })
-
-            })
-
-          
+        const id = req.params.id
+        
+        conn.query('INSERT * INTO resultado_pokemon WHERE id=?',[id], { id_winner: id_winner, id_looser: id_looser, atributo: atributo }, (error, result)=> {
+      
+        if(error){
+            throw error
+                     
                 
-            })
-     }
+        res.redirect('/')
+        }
+    
+        })  
+    })
 
-
+  
 })
-
-
-
-
-
-
-
-
 
 
 module.exports= router;

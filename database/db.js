@@ -14,7 +14,7 @@ conn.connect((error)=>{
         console.error('erro da conexão: '+ error)
         return
     }
-    console.log('conetado com o banco de dados com sucesso!')
+    console.log('conectado com o banco de dados com sucesso!')
 })
 
 module.exports = conn;
