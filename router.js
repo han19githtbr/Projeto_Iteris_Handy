@@ -65,7 +65,7 @@ router.get('/', function (req, res){
 // });
 
 // excluir uma carta na tabela
-router.delete('/delete-action/:id',(req,res)=>{
+router.get('/delete-action/:id',(req,res)=>{
     const id= req.params.id
     console.log(id)
 
@@ -124,7 +124,7 @@ router.post('/add-action', upload.single('upload'), (req, res)=>{
       if(error){
         throw error
       }else{
-          res.redirect('/')
+        res.redirect('/')
         //res.json(result)
       }
   })
@@ -154,7 +154,7 @@ router.patch('/edit-action/:id',(req, res, next)=>{
 
 
 // Filtar a lista de cartas e retornar uma carta específica
-router.get('/edit-action/:id',(req, res)=>{
+router.get('/find-action/:id',(req, res)=>{
       
     const id= req.params.id
     

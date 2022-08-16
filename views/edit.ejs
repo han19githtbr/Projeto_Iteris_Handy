@@ -10,9 +10,9 @@
 </head>
 <body>
 
-    <h2>Edit pokemon</h2>
+    <h2>Buscar pokemon</h2>
     <% if (user){ %>
-    <form action="/edit-action" method="post" enctype="multipart/form-data">
+    <form action="/find-action" method="get" enctype="multipart/form-data">
 
         <input type="text" name="id" value="<%= user.id %>" hidden>
         <input type="file" name="upload" value="<%= user.file %>">
