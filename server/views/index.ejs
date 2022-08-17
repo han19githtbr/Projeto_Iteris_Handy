@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .base{
+   
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            
+        }
+         .base div{
+            width: 50%;
+            background-color: rgb(165, 165, 165);
+        }
+    </style>
+
+    <div class="base">
+      
+    </div>
+    <script>
+        var base= document.querySelector('.base')
+
+           fetch("http://localhost:5000/users")
+           .then(response=> response.json())
+           .then(response=>{
+
+              response.map((item)=>{
+                // console.log(item)
+                var atributo= JSON.parse(item.atributo)
+                var names= item.name
+                console.log(atributo)
+                
+                var name= document.createElement('div')
+                var base2 = document.createElement('div')
+                var hp = document.createElement('div')
+                var attack = document.createElement('div')
+                var defense = document.createElement('div')
+                var specialAttack = document.createElement('div')
+                var specialDefense = document.createElement('div')
+                name.innerHTML=names
+                hp.innerHTML = atributo.hp
+                attack.innerHTML = atributo.attack
+                defense.innerHTML = atributo.defense
+                specialAttack.innerHTML = atributo.special_attack
+                specialDefense.innerHTML = atributo.special_defense
+
+                base2.append(name,hp, attack, defense, specialAttack, specialDefense)
+                base.append(base2)
+            
+
+              })
+           })
+
+    </script>
+</body>
+</html>

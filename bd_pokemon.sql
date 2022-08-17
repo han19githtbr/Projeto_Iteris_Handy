@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Ago-2022 às 19:42
+-- Tempo de geração: 16-Ago-2022 às 21:50
 -- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
+-- versão do PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,13 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `result`
+--
+
+CREATE TABLE `result` (
+  `id` int(11) NOT NULL,
+  `pokemon1` varchar(50) NOT NULL,
+  `pokemon2` varchar(50) NOT NULL,
+  `result` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `result`
+--
+
+INSERT INTO `result` (`id`, `pokemon1`, `pokemon2`, `result`) VALUES
+(126, 'Caterpie', 'Jirachi', 'Caterpie'),
+(127, 'Weedle', 'Whimsicott', 'Whimsicott');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tb_pokemon`
 --
 
 CREATE TABLE `tb_pokemon` (
   `id` int(11) NOT NULL,
-  `file` varchar(300) NOT NULL,
-  `name` varchar(150) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `hp` int(11) NOT NULL,
   `attack` int(11) NOT NULL,
   `defense` int(11) NOT NULL,
@@ -43,31 +63,48 @@ CREATE TABLE `tb_pokemon` (
 -- Extraindo dados da tabela `tb_pokemon`
 --
 
-INSERT INTO `tb_pokemon` (`id`, `file`, `name`, `hp`, `attack`, `defense`, `speed`, `special_attack`, `special_defense`) VALUES
-(3, '1.png1660325124720.png', 'BULBASAUR', 45, 49, 49, 65, 65, 45),
-(4, '2.png1660325210437.png', 'IVYSAUR', 60, 62, 63, 80, 80, 60),
-(5, '3.png1660325268227.png', 'VENUSAUR', 80, 82, 83, 100, 100, 80),
-(6, '4.png1660325318977.png', 'CHARMANDER', 39, 52, 43, 60, 50, 65),
-(7, '5.png1660325372700.png', 'CHARMELEON', 58, 64, 58, 80, 65, 80),
-(8, '6.png1660325419815.png', 'CHARIZARD', 78, 84, 78, 109, 85, 100),
-(9, '7.png1660325471506.png', 'SQUIRTLE', 44, 48, 65, 50, 64, 43),
-(10, '8.png1660325539627.png', 'SQUIRTLE', 59, 63, 80, 65, 80, 58),
-(11, '9.png1660325591757.png', 'BLASTOISE', 79, 83, 100, 85, 105, 78),
-(12, '10.png1660325646288.png', 'CATERPIE', 45, 30, 35, 20, 20, 45),
-(13, '11.png1660325684672.png', 'METAPOD', 50, 20, 55, 25, 25, 30),
-(14, '12.png1660325734305.png', 'BUTTERFREE', 60, 45, 50, 90, 80, 70),
-(15, '13.png1660325782796.png', 'WEEDLE', 40, 35, 30, 20, 20, 50),
-(16, '14.png1660325824919.png', 'KAKUNA', 45, 25, 50, 25, 25, 35),
-(17, '15.png1660325874375.png', 'KAKUNA', 65, 90, 40, 45, 80, 75),
-(18, '16.png1660325922720.png', 'PIDGEY', 40, 45, 40, 35, 35, 56),
-(19, '17.png1660325964368.png', 'PIDGEOTTO', 63, 60, 55, 50, 50, 71),
-(20, '18.png1660326009101.png', 'PIDGEOT', 83, 80, 75, 70, 70, 101),
-(21, '19.png1660326066088.png', 'RATTATA', 30, 56, 35, 25, 35, 72),
-(22, '20.png1660326120157.png', 'RATICATE', 55, 81, 60, 50, 70, 97);
+INSERT INTO `tb_pokemon` (`id`, `name`, `hp`, `attack`, `defense`, `speed`, `special_attack`, `special_defense`) VALUES
+(9, 'Bulbasaur', 42, 41, 54, 45, 45, 74),
+(10, 'Ivysaur', 75, 75, 88, 54, 58, 87),
+(11, 'Squirtle', 54, 85, 44, 55, 44, 88),
+(12, 'Caterpie', 85, 45, 45, 44, 55, 44),
+(13, 'Weedle', 54, 56, 44, 85, 44, 110),
+(14, 'Pidgey', 41, 45, 44, 44, 54, 78),
+(15, 'Combee', 96, 54, 54, 55, 85, 45),
+(16, 'Jirachi', 42, 45, 45, 45, 75, 65),
+(17, 'Whimsicott', 42, 77, 85, 85, 85, 45),
+(18, 'Litwick', 42, 82, 55, 44, 41, 85),
+(19, 'Wooper', 85, 54, 54, 54, 22, 54),
+(20, 'Cinccino', 85, 55, 45, 41, 57, 65);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_pokemon2`
+--
+
+CREATE TABLE `tb_pokemon2` (
+  `id` int(11) NOT NULL,
+  `atributo` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `tb_pokemon2`
+--
+
+INSERT INTO `tb_pokemon2` (`id`, `atributo`) VALUES
+(11, '[{\"hp\":\"teste\",\"attack\":\"112\",\"defense\":\"12\",\"speed\":\"12\"}]'),
+(12, '[{\"hp\":\"33\",\"attack\":\"33\",\"defense\":\"33\",\"speed\":\"33\"}]');
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `result`
+--
+ALTER TABLE `result`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `tb_pokemon`
@@ -76,14 +113,32 @@ ALTER TABLE `tb_pokemon`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `tb_pokemon2`
+--
+ALTER TABLE `tb_pokemon2`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `result`
+--
+ALTER TABLE `result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de tabela `tb_pokemon`
 --
 ALTER TABLE `tb_pokemon`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de tabela `tb_pokemon2`
+--
+ALTER TABLE `tb_pokemon2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

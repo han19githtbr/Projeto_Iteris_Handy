@@ -1,0 +1,73 @@
+
+.base {
+    width: 100%;
+    background-color: beige;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart{
+    width: 200px;
+    height: 150px;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(2, 162, 255);
+    color: white;
+    
+}
+.cartuser {
+    width: 200px;
+    height: 150px;
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(136, 136, 136);
+    color: white;
+
+}
+
+.user{
+   
+    display: flex;
+    gap: 20px;
+}
+
+.iniciar{
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    cursor: pointer;
+}
+
+.sucess{
+    color: green;
+  
+}
+
+.comparar{
+    cursor: pointer;
+}
+.titleCreate {
+    text-align: center;
+}
+.formCreate {
+    text-align: center;
+    height: 80px;
+    padding: 1px;
+}
+.form-input {
+    width: 390px;
+    border-radius: 2rem;
+    border-width: 0.2rem;
+}
+.form-input:hover {
+    cursor: pointer;
+    background-color: aliceblue;  
+}
