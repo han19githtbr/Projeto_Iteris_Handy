@@ -32,13 +32,12 @@ export default function List() {
             });
         }
     }
-  
 
     return (
             <>
             
-                <Link to="/add">
-                    <button>add</button>
+                <Link className="link-button-add" to="/add">
+                    <button className="button-add">add</button>
                 </Link>
                     <table border="1px" width="100%" className="table">
                         <thead className="thead">

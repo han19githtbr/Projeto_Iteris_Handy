@@ -44,9 +44,8 @@ router.get('/pokemon/:name', (req, res) => {
 
 
 
-// selecionar 1 item
-
-router.get('/pokemon/:id',(req, res)=>{
+// selecionar uma carta específica pelo id
+router.get('/edit-action/:id',(req, res)=>{
       
         const id= req.params.id
 
@@ -149,9 +148,9 @@ router.post('/edit-action/:id', (req, res)=>{
         if (error) {
             throw error
         } else {
-            //    res.redirect('/')
-            res.send(result[0])
-            // res.send(result)
+            res.redirect('/')
+            //res.send(result[0])
+            //res.send(result)
            
 
         }

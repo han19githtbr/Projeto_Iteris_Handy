@@ -70,14 +70,14 @@ function Update() {
 
     return (
         <>
-            <h2 className="titleCreate">editar item</h2>
+            <h2 className="titleCreate">Atualizar Carta</h2>
 
             <hr className='bars' />
             <form className='formCreate' onSubmit={handleSubmit} enctype="multipart/form-data">
 
                 <label>Nome</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='name'
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -88,7 +88,7 @@ function Update() {
 
                 <label>hp</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='hp'
                     value={hp}
                     onChange={(e) => setHp(e.target.value)}
@@ -99,7 +99,7 @@ function Update() {
 
                 <label>attack</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='attack'
                     value={attack}
                     onChange={(e) => setAttack(e.target.value)}
@@ -110,7 +110,7 @@ function Update() {
 
                 <label>defense</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='defense'
                     value={defense}
                     onChange={(e) => setDefense(e.target.value)}
@@ -121,7 +121,7 @@ function Update() {
 
                 <label>speed</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='speed'
                     value={speed}
                     onChange={(e) => setSpeed(e.target.value)}
@@ -133,7 +133,7 @@ function Update() {
 
                 <label>special attack</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='specialAttack'
                     value={special_attack}
                     onChange={(e) => setSpecial_attack(e.target.value)}
@@ -145,7 +145,7 @@ function Update() {
 
                 <label>special defense</label>
                 <br></br>
-                <input
+                <input className="form-input"
                     name='specialDefense'
                     value={special_defense}
                     onChange={(e) => setSpecial_defense(e.target.value)}
